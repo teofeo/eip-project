@@ -19,16 +19,25 @@ jobs:
         with:
           node-version: latest
 
-      - name: Setup pnpm cache
+      - name: Cache pnpm store and node_modules
         uses: actions/cache@v4
         with:
           path: |
             ~/.pnpm-store
             monorepo/node_modules
             monorepo/apps/api/node_modules
+            monorepo/apps/web/node_modules
           key: ${{ runner.os }}-pnpm-${{ hashFiles('monorepo/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-
+
+      - name: Cache Turborepo
+        uses: actions/cache@v4
+        with:
+          path: monorepo/.turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
 
       - name: Install pnpm
         run: npm install -g pnpm
@@ -37,6 +46,11 @@ jobs:
         run: |
           cd monorepo
           pnpm install
+
+      - name: Build (with Turborepo)
+        run: |
+          cd monorepo
+          pnpm turbo run build --cache-dir=.turbo
 
       - name: Run tests with coverage
         run: |

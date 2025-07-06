@@ -1,34 +1,19 @@
-# name: CI Pipeline
+name: CI Pipeline
 
-# on:
-#   pull_request:
-#     branches: [ "main", "develop" ]
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
-# jobs:
-#   test-backend:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v4
-#       - name: Set up Node.js
-#         uses: actions/setup-node@v4
-#         with:
-#           node-version: 'latest'
-#       - name: Install dependencies and run tests (AdonisJS)
-#         run: |
-#           cd packages/api
-#           npm install
-#           npm test
+jobs:
+  typecheck:
+    uses: ./.github/workflows/typecheck.yml
 
-#   test-frontend:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v4
-#       - name: Set up Node.js
-#         uses: actions/setup-node@v4
-#         with:
-#           node-version: 'latest'
-#       - name: Install dependencies and run tests (Next.js)
-#         run: |
-#           cd packages/front
-#           npm install
-#           npm test
+  test:
+    uses: ./.github/workflows/test.yml
+    needs: [typecheck]
+
+  build:
+    uses: ./.github/workflows/build.yml
+    needs: [test]
