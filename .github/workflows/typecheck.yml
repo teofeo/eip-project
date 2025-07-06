@@ -7,14 +7,40 @@ jobs:
   typecheck:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          version: 8
-      - uses: actions/setup-node@v4
+          node-version: latest
+
+      - name: Cache pnpm store and node_modules
+        uses: actions/cache@v4
         with:
-          node-version: 20
-          cache: 'pnpm'
-      - run: pnpm install
+          path: |
+            ~/.pnpm-store
+            monorepo/node_modules
+            monorepo/apps/api/node_modules
+            monorepo/apps/web/node_modules
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('monorepo/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+
+      - name: Cache Turborepo
+        uses: actions/cache@v4
+        with:
+          path: monorepo/.turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: |
+          cd monorepo
+          pnpm install
       - name: TypeScript typecheck
         run: pnpm tsc --noEmit
