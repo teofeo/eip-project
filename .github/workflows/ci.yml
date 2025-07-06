@@ -60,11 +60,14 @@ jobs:
           path: ~/.pnpm-store
           key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
 
+      - name: Install pnpm
+        run: npm install -g pnpm
+
       - name: Run tests
         run: pnpm test
 
   build-apps:
-    needs: setup
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -75,6 +78,9 @@ jobs:
         with:
           path: ~/.pnpm-store
           key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+
+      - name: Install pnpm
+        run: npm install -g pnpm
 
       - name: Build application
         run: pnpm run build
