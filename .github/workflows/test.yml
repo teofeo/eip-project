@@ -25,9 +25,6 @@ jobs:
         with:
           path: |
             ~/.pnpm-store
-            monorepo/node_modules
-            monorepo/apps/api/node_modules
-            monorepo/apps/web/node_modules
           key: ${{ runner.os }}-pnpm-${{ hashFiles('monorepo/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-
@@ -35,7 +32,7 @@ jobs:
       - name: Cache Turborepo
         uses: actions/cache@v4
         with:
-          path: monorepo/.turbo
+          path: .turbo
           key: ${{ runner.os }}-turbo-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-turbo-
@@ -46,16 +43,5 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build (with Turborepo)
-        run: pnpm turbo run build --cache-dir=.turbo
-
-      - name: Run tests with coverage
-        run: |
-          cd apps/api
-          pnpm run test:coverage
-
-      - name: Upload coverage artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-report
-          path: coverage/
+      - name: Run tests
+        run: pnpm run test
