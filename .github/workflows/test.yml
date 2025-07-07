@@ -1,5 +1,4 @@
 name: Tubro Run Tests
-
 on:
   workflow_call:
 
@@ -9,6 +8,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10  # Vous pouvez spécifier la version souhaitée de pnpm
+          run_install: false  # Ne pas exécuter pnpm install automatiquement ici
 
       - name: Install Node.js
         uses: actions/setup-node@v4
