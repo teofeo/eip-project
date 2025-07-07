@@ -15,13 +15,28 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Cache node modules
+      - name: Cache pnpm store and node_modules
         uses: actions/cache@v4
         with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('./monorepo/package-lock.json') }}
+          path: |
+            ~/.pnpm-store
+            monorepo/node_modules
+            monorepo/apps/api/node_modules
+            monorepo/apps/web/node_modules
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('monorepo/pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-node-
+            ${{ runner.os }}-pnpm-
+
+      - name: Cache Turborepo
+        uses: actions/cache@v4
+        with:
+          path: monorepo/.turbo
+          key: ${{ runner.os }}-turbo-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-turbo-
+
+      - name: Install pnpm
+        run: npm install -g pnpm
 
       - name: Install dependencies
         run: pnpm install
