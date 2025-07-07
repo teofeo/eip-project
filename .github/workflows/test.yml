@@ -15,6 +15,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: List files
+        run: ls -la
+        
       - uses: pnpm/action-setup@v4
         name: Install pnpm
         with:
@@ -27,8 +30,7 @@ jobs:
           node-version: 20
           cache: 'pnpm'
       
-      - name: List files
-        run: ls -la
+      
 
 
       - name: Install dependencies
