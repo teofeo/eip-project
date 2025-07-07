@@ -2,7 +2,7 @@ name: Tubro Run Tests
 
 on:
   workflow_call:
-  
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -40,14 +40,10 @@ jobs:
         run: npm install -g pnpm
 
       - name: Install dependencies
-        run: |
-          cd monorepo
-          pnpm install
+        run: pnpm install
 
       - name: Build (with Turborepo)
-        run: |
-          cd monorepo
-          pnpm turbo run build --cache-dir=.turbo
+        run: pnpm turbo run build --cache-dir=.turbo
 
       - name: Run tests with coverage
         run: |

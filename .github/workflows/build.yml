@@ -42,7 +42,7 @@ jobs:
         run: pnpm install
 
       - name: Build project
-        run: pnpm run build
+        run: pnpm turbo run build --cache-dir=.turbo
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
