@@ -3,6 +3,10 @@ name: Tubro Run Tests
 on:
   workflow_call:
 
+defaults:
+  run:
+    working-directory: ./monorepo
+
 jobs:
   test:
     runs-on: ubuntu-latest
