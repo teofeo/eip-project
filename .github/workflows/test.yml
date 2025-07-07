@@ -26,6 +26,10 @@ jobs:
         with:
           node-version: 20
           cache: 'pnpm'
+      
+      - name: List files
+        run: ls -la
+
 
       - name: Install dependencies
         run: pnpm install
