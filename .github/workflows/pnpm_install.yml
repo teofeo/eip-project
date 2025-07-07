@@ -19,14 +19,10 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm
 
-      - name: Configure pnpm store directory
-        run: pnpm config set store-dir .pnpm-store
-        working-directory: ./monorepo
-
       - name: Cache pnpm store
         uses: actions/cache@v3
         with:
-          path: .pnpm-store
+          path: ~/.pnpm-store
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('./monorepo/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
