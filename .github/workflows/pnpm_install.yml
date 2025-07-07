@@ -1,6 +1,9 @@
 name: Turbo Run Tests
+
 on:
-  workflow_call:
+  push:
+    branches: [ main ]
+
 jobs:
   cache-and-install:
     runs-on: ubuntu-latest
