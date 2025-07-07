@@ -20,6 +20,8 @@ jobs:
         with:
           node-version: latest
           cache: 'pnpm'
+        working-directory: ./monorepo
+
 
       - name: Install dependencies
         run: pnpm install
