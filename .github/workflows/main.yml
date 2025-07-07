@@ -19,5 +19,5 @@ jobs:
     uses: ./.github/workflows/build.yml
 
   call-containerize-workflow:
-    needs: call-containerize-workflow
+    needs: call-build-workflow
     uses: ./.github/workflows/containerize.yml
