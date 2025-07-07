@@ -1,9 +1,6 @@
-name: pnpm Example Workflow
+name: Turbo Run Tests
 on:
-  push:
-    branches:
-      - main
-
+  workflow_call:
 jobs:
   cache-and-install:
     runs-on: ubuntu-latest
@@ -19,10 +16,20 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm
 
+      # Configure pnpm to use a local store directory
+      - name: Configure pnpm store directory
+        run: pnpm config set store-dir .pnpm-store
+        working-directory: ./monorepo
+
+      # Create the store directory if it doesn't exist
+      - name: Create pnpm store directory
+        run: mkdir -p .pnpm-store
+        working-directory: ./monorepo
+
       - name: Cache pnpm store
         uses: actions/cache@v3
         with:
-          path: ~/.pnpm-store
+          path: ./monorepo/.pnpm-store
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('./monorepo/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
