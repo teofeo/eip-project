@@ -3,6 +3,10 @@ name: Docker Build and Push
 on:
   workflow_call:
 
+defaults:
+  run:
+    working-directory: ./monorepo
+
 jobs:
   docker:
     name: Build and push Docker image
