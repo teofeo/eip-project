@@ -3,10 +3,6 @@ name: Tubro Run Tests
 on:
   workflow_call:
 
-name: Turborepo Run Tests
-on:
-  workflow_call:
-
 jobs:
   test:
     runs-on: ubuntu-latest
