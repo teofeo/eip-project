@@ -9,6 +9,8 @@
     "build": "node ace build",
     "dev": "node ace serve --hmr",
     "test": "node ace test",
+    "test:unit": "node ace test unit",
+    "test:functional": "node ace test functional",
     "test:coverage": "c8 --reporter=html --reporter=text --report-dir=coverage node ace test",
     "lint": "eslint . --ext .ts",
     "format": "prettier --write .",
