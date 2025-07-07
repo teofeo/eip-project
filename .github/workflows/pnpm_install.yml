@@ -1,24 +1,36 @@
 name: pnpm Example Workflow
 on:
   push:
+    branches:
+      - main
 
 jobs:
-  build:
-    runs-on: ubuntu-22.04
-    strategy:
-      matrix:
-        node-version: [23]
+  cache-and-install:
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: Install pnpm
-      uses: pnpm/action-setup@v4
-      with:
-        version: 10
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'pnpm'
-    - name: Install dependencies
-      run: pnpm install
-      working-directory: ./monorepo
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: latest
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Configure pnpm store directory
+        run: pnpm config set store-dir .pnpm-store
+        working-directory: ./monorepo
+
+      - name: Cache pnpm store
+        uses: actions/cache@v3
+        with:
+          path: .pnpm-store
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('./monorepo/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
+        working-directory: ./monorepo
