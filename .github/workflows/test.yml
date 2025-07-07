@@ -10,13 +10,24 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Install Node.js
         uses: actions/setup-node@v4
         with:
           node-version: latest
 
       - name: Install pnpm
         run: npm install -g pnpm
+
+      - name: Configure pnpm store directory
+        run: pnpm config set store-dir .pnpm-store
+
+      - name: Cache pnpm store
+        uses: actions/cache@v3
+        with:
+          path: .pnpm-store
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
         run: pnpm install
