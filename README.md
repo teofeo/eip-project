@@ -1,4 +1,4 @@
-# Sauvons le Sport Ensemble 🏆
+# Iziclub 🏆
 
 ## Description
 Alors que le budget du ministère des Sports a été réduit, notre application vise à redonner vie au sport en France. En utilisant notre application, les clubs bénéficient d'une visibilité accrue grâce à une communauté engagée. 🚀
@@ -9,9 +9,9 @@ Alors que le budget du ministère des Sports a été réduit, notre application 
 - 📈 Croissance et soutien pour les associations sportives
 
 ## Technologies Utilisées
-- Frontend : React.js
-- Backend : Node.js, Express
-- Base de Données : MongoDB
+- Frontend : Next.js
+- Backend : Adonisjs
+- Base de Données : PostgreSQL
 
 ## Comment Contribuer
 Nous sommes ouverts aux contributions ! Suivez ces étapes pour contribuer :
