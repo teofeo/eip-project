@@ -11,6 +11,9 @@ jobs:
     name: Run tests in monorepo
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Setup Environment
         uses: ./.github/actions/setup-environment.yml
 
