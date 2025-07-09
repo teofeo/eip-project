@@ -1,10 +1,6 @@
 name: 'Setup Environment'
 description: 'Sets up the environment with Node.js, pnpm_cache, turbo_cache & dependencies'
 
-defaults:
-  run:
-    working-directory: ./monorepo
-
 runs:
   using: "composite"
   steps:
@@ -23,11 +19,13 @@ runs:
     - name: Configure pnpm store directory
       shell: bash
       run: pnpm config set store-dir .pnpm-store
+      working-directory: ./monorepo
 
     - name: Create pnpm store directory
       shell: bash
       run: mkdir -p .pnpm-store
-
+      working-directory: ./monorepo
+      
     - name: Cache pnpm store
       uses: actions/cache@v3
       with:
@@ -47,4 +45,4 @@ runs:
     - name: Install dependencies
       shell: bash
       run: pnpm install
-      workging-directory: ./monorepo
+      working-directory: ./monorepo
