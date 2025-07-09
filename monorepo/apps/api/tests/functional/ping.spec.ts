@@ -1,6 +1,7 @@
 import { test } from '@japa/runner'
 
-test.group('Ping API', () => {
+
+test.group('Ping API ', () => {
   test('returns pong', async ({ client, assert }) => {
     const response = await client.get('/api/ping')
 
