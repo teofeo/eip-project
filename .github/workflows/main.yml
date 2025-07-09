@@ -1,0 +1,23 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: ['hotfix/**' ]
+  pull_request:
+    branches: [ main, develop, 'release/**', 'hotfix/**' ]
+
+defaults:
+  run:
+    working-directory: ./monorepo
+
+jobs:
+  test-workflow:
+    uses: ./.github/workflows/test.yml
+
+  build-workflow:
+    needs: test-workflow
+    uses: ./.github/workflows/build.yml
+
+  # containerize-workflow:
+  #   needs: build-workflow
+  #   uses: ./.github/workflows/containerize.yml
