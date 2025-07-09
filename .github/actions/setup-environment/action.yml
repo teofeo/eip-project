@@ -1,8 +1,5 @@
 name: 'Setup Environment'
 description: 'Sets up the environment with Node.js, pnpm_cache, turbo_cache & dependencies'
-defaults:
-  run:
-    working-directory: ./monorepo
 
 runs:
   using: "composite"
@@ -21,26 +18,24 @@ runs:
 
     - name: Configure pnpm store directory
       shell: bash
-      run: pnpm config set store-dir .pnpm-store
-      working-directory: ./monorepo
+      run: pnpm config set store-dir ./monorepo/.pnpm-store
 
     - name: Create pnpm store directory
       shell: bash
-      run: mkdir -p .pnpm-store
-      working-directory: ./monorepo
+      run: mkdir -p ./monorepo/.pnpm-store
       
     - name: Cache pnpm store
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
-        path: ./pnpm-store
-        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('./pnpm-lock.yaml') }}
+        path: ./monorepo/.pnpm-store
+        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('./monorepo/pnpm-lock.yaml') }}
         restore-keys: |
           ${{ runner.os }}-pnpm-store-
 
     - name: Cache Turborepo
       uses: actions/cache@v4
       with:
-        path: .turbo
+        path: ./monorepo/.turbo
         key: ${{ runner.os }}-turbo-${{ github.sha }}
         restore-keys: |
           ${{ runner.os }}-turbo-
