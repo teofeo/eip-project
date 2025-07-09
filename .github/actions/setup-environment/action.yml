@@ -1,5 +1,8 @@
 name: 'Setup Environment'
 description: 'Sets up the environment with Node.js, pnpm_cache, turbo_cache & dependencies'
+defaults:
+  run:
+    working-directory: ./monorepo
 
 runs:
   using: "composite"
