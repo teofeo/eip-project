@@ -1,0 +1,21 @@
+name: Tests running by Turborepo
+description: 'Runs tests using Turborepo in a monorepo setup'
+defaults:
+  run:
+    working-directory: ./monorepo
+on:
+  workflow_call:
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    name: Run tests in monorepo
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment.yml
+
+      - name: Run tests
+        run: pnpm turbo run test  --cache-dir=.turbo

@@ -3,11 +3,11 @@ node_modules
 build
 tmp
 
-# Secrets
 .env
 .env.local
 .env.production.local
 .env.development.local
+
 
 # Frontend assets compiled code
 public/assets

@@ -1,2 +1,25 @@
-# EIP-Prototype
-IziClub est un projet innovant utilisant une architecture monorepo pour créer un prototype d'application. Il intègre Next.js pour le web et React Native pour les mobiles, offrant une solution front-end unifiée. Firebase est choisi pour la base de données, simplifiant le développement.
+# Iziclub 🏆
+
+## Description
+Alors que le budget du ministère des Sports a été réduit, notre application vise à redonner vie au sport en France. En utilisant notre application, les clubs bénéficient d'une visibilité accrue grâce à une communauté engagée. 🚀
+
+## Fonctionnalités
+- 🔍 Visibilité accrue pour les clubs sportifs
+- 🤝 Communauté engagée et active
+- 📈 Croissance et soutien pour les associations sportives
+
+## Technologies Utilisées
+- Frontend : Next.js
+- Backend : Adonisjs
+- Base de Données : PostgreSQL
+
+## Comment Contribuer
+Nous sommes ouverts aux contributions ! Suivez ces étapes pour contribuer :
+1. Fork le projet
+2. Créez votre branche de fonctionnalité
+3. Commitez vos changements
+4. Poussez la branche
+5. Ouvrez une Pull Request
+
+## Licence
+Ce projet est sous licence MIT.
