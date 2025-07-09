@@ -1,0 +1,23 @@
+{
+  "include": [
+    "app/controllers/**",
+    "app/models/**",
+    "app/services/**",
+    "app/middleware/**"
+  ],
+  "exclude": [
+    "app/validators/**",
+    "app/exceptions/**",
+    "start/**",
+    "config/**",
+    "database/**",
+    "public/**",
+    "resources/**",
+    "tests/**",
+    "**/*.d.ts"
+  ],
+  "reporter": [
+    "text",
+    "lcov"
+  ]
+}
