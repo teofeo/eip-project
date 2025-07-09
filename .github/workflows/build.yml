@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Setup Environment
-        uses: ./.github/actions/setup-environment.yml
+        uses: ./.github/actions/setup-environment
 
       - name: Build project
         run: pnpm turbo run build --cache-dir=.turbo
