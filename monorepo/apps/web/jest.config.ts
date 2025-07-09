@@ -11,13 +11,11 @@ const config: Config = {
   collectCoverage: true, // Active la collecte de couverture
   collectCoverageFrom: [
     'src/**/*.{js,jsx,ts,tsx}', // Inclut tous les fichiers dans le dossier src
-    '!src/**/*.d.ts',          // Exclut les fichiers de déclaration de type
-    '!src/**/node_modules/**', // Exclut les node_modules dans le dossier src
-    '!src/.next/**',           // Exclut le dossier .next (si présent dans src)
-    '!src/coverage/**',        // Exclut le dossier coverage
-    '!src/*/public/**',        // Exclut les fichiers publics
-    '!src/*/*.config.{js,ts}', // Exclut les fichiers de configuration
-    '!src/*/dist/**',          // Exclut le dossier dist
+    '!src/**/*.d.ts',
+    '!src/**/index.ts',
+    '!src/types/**',
+    '!src/app/**/layout.tsx', // Layout généraux rarement utiles à couvrir
+    '!src/app/**/page.tsx',   // Pages peuvent être testées e2e
   ],
   coverageDirectory: 'coverage',
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
