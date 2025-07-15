@@ -133,3 +133,4 @@ dist
 .turbo
 **/.vscode
 **/.turbo
+.pnpm-store
