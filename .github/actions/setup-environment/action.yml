@@ -12,17 +12,12 @@ runs:
       with:
         node-version: latest
 
-    - name: Install pnpm
+    - name: Install pnpm and configure store directory
       shell: bash
-      run: npm install -g pnpm
-
-    - name: Configure pnpm store directory
-      shell: bash
-      run: pnpm config set store-dir ./monorepo/.pnpm-store
-
-    - name: Create pnpm store directory
-      shell: bash
-      run: mkdir -p ./monorepo/.pnpm-store
+      run: |
+        npm install -g pnpm
+        pnpm config set store-dir ./monorepo/.pnpm-store
+        mkdir -p ./monorepo/.pnpm-store
       
     - name: Cache pnpm store
       uses: actions/cache@v4

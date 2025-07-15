@@ -1,5 +1,4 @@
 name: Build Project
-description: 'Builds the project using Turborepo in a monorepo setup'
 defaults:
   run:
     working-directory: ./monorepo
