@@ -57,8 +57,8 @@ jobs:
 
             docker stop eip-iziclub-api-dev || true
             docker rm eip-iziclub-api-dev || true
-            docker pull teofeo/eip-iziclub-api-dev
-            docker run -d -p 3333:3333 --name eip-iziclub-api-dev teofeo/eip-iziclub-api-dev
+            docker pull teofeo/eip-iziclub-api:dev
+            docker run -d -p 3333:3333 --name eip-iziclub-api-dev teofeo/eip-iziclub-api:dev
 
             docker stop eip-iziclub-web-dev || true
             docker rm eip-iziclub-web-dev || true
