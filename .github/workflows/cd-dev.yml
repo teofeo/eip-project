@@ -55,15 +55,15 @@ jobs:
               echo "Déjà connecté à Docker."
             fi
 
-            CONTAINER_NAME="eip-iziclub-api-dev"
-            IMAGE_NAME="eip-iziclub-api:dev"
+            CONTAINER_NAME="teofeo/eip-iziclub-api-dev"
+            IMAGE_NAME="teofeo/eip-iziclub-api:dev"
 
             docker stop $CONTAINER_NAME || true
             docker rm $CONTAINER_NAME || true
             docker pull $IMAGE_NAME
-            docker run -d --name $CONTAINER_NAME $IMAGE_NAME
+            docker run -d -p 3333:3333 --name $CONTAINER_NAME $IMAGE_NAME
 
-            docker stop eip-iziclub-web:dev || true
-            docker rm eip-iziclub-web:dev || true
-            docker pull eip-iziclub-web:dev
-            docker run -d --name eip-iziclub-web:dev eip-iziclub-web:dev
+            docker stop teofeo/eip-iziclub-web:dev || true
+            docker rm teofeo/eip-iziclub-web:dev || true
+            docker pull teofeo/eip-iziclub-web:dev
+            docker run -d -p 3000:3000 --name teofeo/eip-iziclub-web:dev teofeo/eip-iziclub-web:dev
