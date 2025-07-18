@@ -46,11 +46,24 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             #!/bin/bash
-            ls -la
-            exit()
+
+            if ! docker system info | grep -q "Username"; then
+              echo "Pas de session Docker active. Connexion nécessaire..."
+
+              echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+            else
+              echo "Déjà connecté à Docker."
+            fi
+
             CONTAINER_NAME="eip-iziclub-api-dev"
             IMAGE_NAME="eip-iziclub-api:dev"
+
             docker stop $CONTAINER_NAME || true
             docker rm $CONTAINER_NAME || true
             docker pull $IMAGE_NAME
             docker run -d --name $CONTAINER_NAME $IMAGE_NAME
+
+            docker stop eip-iziclub-web:dev || true
+            docker rm eip-iziclub-web:dev || true
+            docker pull eip-iziclub-web:dev
+            docker run -d --name eip-iziclub-web:dev eip-iziclub-web:dev
