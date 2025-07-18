@@ -17,7 +17,7 @@ jobs:
       - name: Build Docker image
         run: docker build -f apps/api/Dockerfile -t eip-iziclub-api:dev apps/api/.
       - name: Push Docker image
-        run: docker push eip-iziclub-api:dev
+        run: docker push teofeo/eip-iziclub-api:dev
 
   build-docker-web-dev:
     runs-on: ubuntu-latest
@@ -30,7 +30,7 @@ jobs:
       - name: Build Docker image
         run: docker build -f apps/web/Dockerfile -t eip-iziclub-web:dev apps/web/.
       - name: Push Docker image
-        run: docker push eip-iziclub-web:dev
+        run: docker push teofeo/eip-iziclub-web:dev
   ssh-remote:
     name: Execute remote SSH commands
     needs: [build-docker-api-dev, build-docker-web-dev]
