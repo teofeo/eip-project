@@ -1,5 +1,6 @@
 name: CD Pipeline
 on:
+  workflow_dispatch:
   push:
     branches: [develop]
 defaults:
@@ -8,7 +9,7 @@ defaults:
 jobs:
   build-docker-api-dev:
     runs-on: ubuntu-latest
-    name: Build and push Docker image
+    name: Build and push Docker image - teofeo/eip-iziclub-api:dev
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -21,7 +22,7 @@ jobs:
 
   build-docker-web-dev:
     runs-on: ubuntu-latest
-    name: Build and push Docker image
+    name: Build and push Docker image - teofeo/eip-iziclub-web:dev
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -45,6 +46,8 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             #!/bin/bash
+            ls -la
+            exit()
             CONTAINER_NAME="eip-iziclub-api-dev"
             IMAGE_NAME="eip-iziclub-api:dev"
             docker stop $CONTAINER_NAME || true
