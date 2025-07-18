@@ -1,0 +1,59 @@
+{
+  "name": "Alpine Node Monorepo (AdonisJS + Next.js)",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "editor.formatOnSave": true
+      },
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "christian-kohler.path-intellisense",
+        "christian-kohler.npm-intellisense",
+        "ms-vscode.vscode-typescript-next",
+        "jripouteau.adonis-vscode-extension",
+        "mikestead.dotenv",
+        "dsznajder.es7-react-js-snippets",
+        "bradlc.vscode-tailwindcss",
+        "styled-components.vscode-styled-components",
+        "GitHub.copilot",
+        "humao.rest-client",
+        "formulahendry.auto-rename-tag",
+        "mhutchie.git-graph",
+        "ms-azuretools.vscode-containers",
+        "msjsdiag.vscode-react-native"
+      ]
+    }
+  },
+  "remoteUser": "node",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces,type=bind",
+ 
+  "workspaceFolder": "/workspaces/monorepo",
+  "forwardPorts": [3333, 3000, 19000, 19001, 19002],
+  "portsAttributes": {
+    "3333": {
+      "label": "AdonisJS",
+      "onAutoForward": "openBrowser"
+    },
+    "3000": {
+      "label": "Next.js",
+      "onAutoForward": "openBrowser"
+    },
+    "19000": {
+      "label": "Expo Metro",
+      "onAutoForward": "notify"
+    },
+    "19001": {
+      "label": "Expo Live Reload",
+      "onAutoForward": "notify"
+    },
+    "19002": {
+      "label": "Expo Web UI",
+      "onAutoForward": "openBrowser"
+    }
+  }
+}

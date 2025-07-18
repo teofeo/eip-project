@@ -1,5 +1,4 @@
 name: Tests running by Turborepo
-description: 'Runs tests using Turborepo in a monorepo setup'
 defaults:
   run:
     working-directory: ./monorepo

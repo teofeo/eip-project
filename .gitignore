@@ -133,3 +133,6 @@ dist
 .turbo
 **/.vscode
 **/.turbo
+.pnpm-store
+
+.github_copy
