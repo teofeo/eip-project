@@ -1,25 +1,18 @@
-FROM node:current-alpine3.22 AS base
-
-FROM base AS deps
+# Étape de build
+FROM node:24-alpine3.21 AS builder
 WORKDIR /app
-ADD package.json package-lock.json ./
-RUN npm ci
+COPY . ./
+RUN npm install
+RUN npm run build
 
-FROM base AS production-deps
+# Étape de production
+FROM node:24-alpine3.21
 WORKDIR /app
-ADD package.json package-lock.json ./
+COPY --from=builder /app/build ./build
+COPY --from=builder /app/package.json /app/package-lock.json ./
 RUN npm ci --omit=dev
 
-FROM base AS build
-WORKDIR /app
-COPY --from=deps /app/node_modules /app/node_modules
-ADD . .
-RUN node ace build
+RUN rm -rf package-lock.json package.json
 
-FROM base
-ENV NODE_ENV=production
-WORKDIR /app
-COPY --from=production-deps /app/node_modules /app/node_modules
-COPY --from=build /app/build /app
-EXPOSE 8080
-CMD ["node", "./bin/server.js"]
+EXPOSE 3333
+CMD ["node", "./build/bin/server.js"]

@@ -47,9 +47,15 @@ importers:
       '@vinejs/vine':
         specifier: ^3.0.1
         version: 3.0.1
+      pino-pretty:
+        specifier: ^13.0.0
+        version: 13.0.0
       reflect-metadata:
         specifier: ^0.2.2
         version: 0.2.2
+      ts-node-maintained:
+        specifier: ^10.9.5
+        version: 10.9.5(@swc/core@1.11.24)(@types/node@22.16.0)(typescript@5.8.2)
     devDependencies:
       '@adonisjs/assembler':
         specifier: ^7.8.2
@@ -96,15 +102,9 @@ importers:
       hot-hook:
         specifier: ^0.4.0
         version: 0.4.0
-      pino-pretty:
-        specifier: ^13.0.0
-        version: 13.0.0
       prettier:
         specifier: ^3.5.3
         version: 3.6.2
-      ts-node-maintained:
-        specifier: ^10.9.5
-        version: 10.9.5(@swc/core@1.11.24)(@types/node@22.16.0)(typescript@5.8.2)
       typescript:
         specifier: ~5.8.2
         version: 5.8.2

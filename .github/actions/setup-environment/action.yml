@@ -4,9 +4,6 @@ description: 'Sets up the environment with Node.js, pnpm_cache, turbo_cache & de
 runs:
   using: "composite"
   steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:

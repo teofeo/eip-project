@@ -1,0 +1,53 @@
+name: CD Pipeline
+on:
+  push:
+    branches: [develop]
+defaults:
+  run:
+    working-directory: ./monorepo
+jobs:
+  build-docker-api-dev:
+    runs-on: ubuntu-latest
+    name: Build and push Docker image
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+      - name: Build Docker image
+        run: docker build -f apps/api/Dockerfile -t eip-iziclub-api:dev apps/api/.
+      - name: Push Docker image
+        run: docker push eip-iziclub-api:dev
+
+  build-docker-web-dev:
+    runs-on: ubuntu-latest
+    name: Build and push Docker image
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+      - name: Build Docker image
+        run: docker build -f apps/web/Dockerfile -t eip-iziclub-web:dev apps/web/.
+      - name: Push Docker image
+        run: docker push eip-iziclub-web:dev
+  ssh-remote:
+    name: Execute remote SSH commands
+    needs: [build-docker-api-dev, build-docker-web-dev]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Execute remote SSH commands using SSH key
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.HOST_DEV }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            #!/bin/bash
+            CONTAINER_NAME="eip-iziclub-api-dev"
+            IMAGE_NAME="eip-iziclub-api:dev"
+            docker stop $CONTAINER_NAME || true
+            docker rm $CONTAINER_NAME || true
+            docker pull $IMAGE_NAME
+            docker run -d --name $CONTAINER_NAME $IMAGE_NAME
