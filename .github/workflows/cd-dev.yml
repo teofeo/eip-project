@@ -15,7 +15,7 @@ jobs:
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
       - name: Build Docker image
-        run: docker build -f apps/api/Dockerfile -t eip-iziclub-api:dev apps/api/.
+        run: docker build -f apps/api/Dockerfile -t teofeo/eip-iziclub-api:dev apps/api/.
       - name: Push Docker image
         run: docker push teofeo/eip-iziclub-api:dev
 
@@ -28,7 +28,7 @@ jobs:
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
       - name: Build Docker image
-        run: docker build -f apps/web/Dockerfile -t eip-iziclub-web:dev apps/web/.
+        run: docker build -f apps/web/Dockerfile -t teofeo/eip-iziclub-web:dev apps/web/.
       - name: Push Docker image
         run: docker push teofeo/eip-iziclub-web:dev
   ssh-remote:
