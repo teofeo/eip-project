@@ -51,7 +51,7 @@ jobs:
             docker rm eip-iziclub-api-dev || true
             docker rmi teofeo/eip-iziclub-api:dev || true
             docker pull teofeo/eip-iziclub-api:dev
-            docker run -p 3333:3333 --name eip-iziclub-api-dev \
+            docker run -d -p 3333:3333 --name eip-iziclub-api-dev \
             -e NODE_ENV=development \
             -e PORT=${{ secrets.ADONISJS_PORT }} \
             -e APP_KEY=${{ secrets.ADONISJS_API_SECRET_KEY }} \
